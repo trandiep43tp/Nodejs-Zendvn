@@ -1,0 +1,13 @@
+
+ <% filterstatusHelper = (statusFilter, query) =>{ 
+     statusFilter.forEach((status, index)=>{
+     let link = systemConfig.prefixAdmin + "/items/" + status.value;
+     if(query !== "" )  link += "?search=" + query;
+ %>
+        <a class="btn m-b-sm btn-<%=status.class %> btn-sm" href="<%= link %>">
+            <%= status.name.toUpperCase() + " (" + status.count +")" %> 
+        </a>
+    <% }) %>
+<% } %> 
+
+   

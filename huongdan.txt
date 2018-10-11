@@ -1,0 +1,31 @@
+cai nodemon
+npm install --save-dev nodemon
+vào "scripts": {
+    "start": "node ./bin/www"
+  },  trong package.json sửa node thành nodemon
+
+khi mở các layout thì ta thấy có nhiều nội dung trùng nhau. dể tách các nôi dung trùng nhau thành 1 file 
+ta làm như sau:
+sử dụng ejs layout
+  npm install express-ejs-layouts
+    var expressLayouts = require('express-ejs-layouts');
+    app.use(expressLayouts);
+    app.set('layout', 'backend');
+    Sau khi đã tạo các câu lệnh trên đầy đủ ta tạo 1 file hiển thị chung( ở bài này là backend)
+    khi đó các view khác thì chỉ kéo phần nội đung vào thôi
+
+
+Cách sử dụng thư viện mongoose
+  https://mongoosejs.com
+
+cách cài thông báo
+  tìm trên google: express notification tatim được : https://www.npmjs.com/package/express-flash-notification
+  cài đặt: npm i express-flash-notification --save
+  thêm các câu lệnh sau vào app:
+    const flash = require('express-flash-notification');
+    const cookieParser = require('cookie-parser');
+    const session = require('express-session');
+
+    có thể xem thêm phần cấu hình nâng cao: thay đổi tên flash, đặt vào thư mục khác
+
+  
