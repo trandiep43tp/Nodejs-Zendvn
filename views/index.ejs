@@ -16,33 +16,27 @@
 		}
 	%>
 
-    <div class="container">
-        <div class="col-md-6 fixed">					
-			<form action="<%= systemConfig.prefixAdmin %>/submit" method="POST" >
-				<div class="form-group row">
-					<label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-					<div class="col-sm-10">
-					<input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Email" value="<%=item.email%>">
+    <div class="container">		
+		<div class="row ">
+			<div class="col-xs-12 col-sm-6 col-md-4" ></div>
+			<div class="col-xs-12 col-sm-6 col-md-4 fixed" >				
+				<form action="<%= systemConfig.prefixAdmin %>/submit" method="POST" class="fixed" >
+					<div class="form-group">
+						<label class="col-form-label">Email</label>
+						<input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Email" value="<%=item.email%>">						
+						<small id="emailHelp" class="form-text text-muted " style="color:blue" ><%=email %></small>	
+					</div>
+					<div class="form-group">
+						<label for="inputPassword3" class="col-form-label">Password</label>
+						<input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password" >
+						<small id="emailHelp" class="form-text text-muted"  style="color:blue"><%=pass %></small>
+					</div>
+					<button type="submit" class="btn btn-primary">Sign in</button>					
+				</form>
 				
-						<small id="emailHelp" class="form-text text-muted " style="color:blue" ><%=email %></small>									
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-					<div class="col-sm-10">
-					<input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password" >
-					<small id="emailHelp" class="form-text text-muted"  style="color:blue"><%=pass %></small>
-					</div>
-				</div>
-										
-				<div class="form-group row">
-					<div class="col-sm-10">
-					<button type="submit" class="btn btn-primary">Sign in</button>
-					</div>
-				</div>
-			</form>
-        </div>
-        
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4" ></div>
+		</div>
     </div>
 <% include elements/scripts %>
 </body>

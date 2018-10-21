@@ -54,9 +54,7 @@ img.error-page-img{
 
 
 div.fixed {
-    position: relative;
-    left: 300px;
-    top: 150px;   
-    width: 500px;
+    position: relative;   
+    top: 120px;     
     border: 1px ;
 }
