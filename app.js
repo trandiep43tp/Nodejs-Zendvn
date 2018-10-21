@@ -73,6 +73,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', require('./routes/backend/home'));
+app.use('/admin', require('./routes/backend/home'));
  
 //thiêt lập layout được cài vào
 app.use(expressLayouts);    

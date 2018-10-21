@@ -10,11 +10,16 @@ const validate   = require("../../validates/users");
 var systemConfig = require(__path_configs + 'system');
 const link = '/'+ systemConfig.prefixAdmin + '/items';
  //console.log(use)
-
+ router.get('/',function(req, res, next) {  
+	let item ={email: '', password: ''}
+	//khai báo người đăng nhập
+	global.use = '';
+	res.render('index',{ errors: [], item } );
+});
 
 
 /* GET home page. */
-router.get('(/admin)?',function(req, res, next) {  
+router.get('/admin',function(req, res, next) {  
 	let item ={email: '', password: ''}
 	//khai báo người đăng nhập
 	global.use = '';
