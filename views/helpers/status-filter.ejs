@@ -1,7 +1,7 @@
 
- <% filterstatusHelper = (statusFilter, query) =>{ 
+ <% filterstatusHelper = (collection, statusFilter, query) =>{ 
      statusFilter.forEach((status, index)=>{
-     let link = systemConfig.prefixAdmin + "/items/" + status.value;
+     let link = systemConfig.prefixAdmin + "/"+ collection +"/" + status.value;
      if(query !== "" )  link += "?search=" + query;
  %>
         <a class="btn m-b-sm btn-<%=status.class %> btn-sm" href="<%= link %>">

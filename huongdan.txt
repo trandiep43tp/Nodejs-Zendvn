@@ -18,6 +18,26 @@ sử dụng ejs layout
 Cách sử dụng thư viện mongoose
   https://mongoosejs.com
 
+  //tìm hiểu về mongoose
+	//định nghĩa 1 kiểu collection
+    //  var kittySchema = new mongoose.Schema({
+    //    name: String
+    //  });
+	//khai báo 1 đối tượng  'Kitten' là tên 1 đối tượng
+    //var Kitten = mongoose.model('Kitten', kittySchema);
+	// //tạo ra một hàng
+    // var silence = new Kitten({ name: 'nodejs' });
+	// //lưu vào dữ liệu
+    // silence.save(function (err, silence ) {
+    //   if (err) return console.error(err);
+    // });
+	 //tìm kiếm 
+	// Kitten.find(function (err, kittens) {
+	// 	if (err) return console.error(err);
+	// 	console.log(kittens);
+	//   })
+
+
 cách cài thông báo
   tìm trên google: express notification tatim được : https://www.npmjs.com/package/express-flash-notification
   cài đặt: npm i express-flash-notification --save
@@ -27,5 +47,8 @@ cách cài thông báo
     const session = require('express-session');
 
     có thể xem thêm phần cấu hình nâng cao: thay đổi tên flash, đặt vào thư mục khác
+
+cách validator dữ liệu
+tìm kiếm nodejs express validator ta dược trang: https://www.npmjs.com/package/express-validator
 
   

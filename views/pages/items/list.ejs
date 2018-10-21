@@ -4,6 +4,14 @@
    <% include ../../helpers/status %>  
    <% include ../../helpers/pagination %>
 
+
+    <!--đây là phần định nghĩa sử dụng cho toàn bộ-->
+   <%
+        const collection = 'items';
+        //console.log(collection)
+        const linkPrefix = systemConfig.prefixAdmin + `/${collection}/`;
+   %>
+
    <!--Kéo vào câu thông báo-->
    <%- locals.flash %>
    <!-- <div class="alert alert-success" role="alert">            
@@ -16,7 +24,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     Search & Filter
-                    <a href="<%= systemConfig.prefixAdmin %>/items/all">
+                    <a href="<%= linkPrefix %>all">
                     <span id="icon-reload" class="glyphicon glyphicon-refresh"></span>
                     </a>
                 </div>
@@ -24,7 +32,7 @@
                     <div class="row">
                         <div class="status-list col-sm-6 pl0">
                             <!--Kéo hàm vào-->                            
-                               <% filterstatusHelper(statusFilter, query) %> 
+                               <% filterstatusHelper(collection, statusFilter, query) %> 
                             <!--cách viết trực tiếp-->
                             <!-- <% statusFilter.forEach((status, index)=>{ %>  statusFilter là biến được truyền từ roundter
                                 <a class="btn m-b-sm btn-<%=status.class %> btn-sm" href="<%= status.link %>">
@@ -34,7 +42,7 @@
                            
                         </div>
                         <div class="col-sm-6">
-                            <form action="<%= systemConfig.prefixAdmin %>/items/<%=currentStatus %>" method="GET">
+                            <form action="<%= linkPrefix %><%=currentStatus %>" method="GET">
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="search" placeholder="Search for..." value="<%= query %>">
                                     <span class="input-group-btn">
@@ -42,7 +50,7 @@
                                     </span>
                                     <span class="input-group-btn">
                                         <button class="btn btn-success" type="button">
-                                            <a href="<%= systemConfig.prefixAdmin %>/items/<%=currentStatus %>">Clear</a>
+                                            <a href="<%= linkPrefix %><%=currentStatus %>">Clear</a>
                                         </button>
                                     </span>
                                 </div>
@@ -58,9 +66,9 @@
                     List Items
                 </div>
                 <!-- /.panel-heading -->
-                <div class="panel-body">
+                <div class="panel-body"> 
                     <form role="form" class="form-inline zt-form" id="zt-form" action="" method="post">                       
-                        <%- actionHelper('items') %> 
+                        <%- actionHelper(collection) %> 
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
@@ -83,23 +91,12 @@
                                             <td> <%= index+1 %> </td>
                                             <td> <%=item.name %> </td>
                                             <td>
-                                                 <%- statusHelper('items', item.id, item.status) %>  <!--Cách kéo hàm vào -->
-                                                <!-- cách viết trực tiếp -->
-                                                <!-- <% if(item.status =="active"){ %>
-                                                    <a href="#">
-                                                        <span class="label label-success">active</span>
-                                                    </a>
-                                                <% } else if(item.status =="inactive"){ %>
-                                                        <a href="#">
-                                                        <span class="label label-warning">In active</span>
-                                                        </a>
-                                                <% } %>   -->
-                                                                                                
+                                                 <%- statusHelper(collection, item.id, item.status) %>  <!--Cách kéo hàm vào -->                                                                                                                                              
                                             </td>
                                             <td><input type="number" value="<%=item.ordering %>" class="text-center ordering"></td>
                                             <td>
-                                                <a href="#" type="button" class="btn btn-warning btn-sm">Edit</a>
-                                                <a href="<%= systemConfig.prefixAdmin %>/items/delete/<%=item.id%>" type="button" class="btn btn-danger btn-sm btn-delete">Delete </a>
+                                                <a href="<%= linkPrefix %>form/edit/<%=item.id%>" type="button" class="btn btn-warning btn-sm">Edit</a>
+                                                <a href="<%= linkPrefix %>delete/<%=item.id%>" type="button" class="btn btn-danger btn-sm btn-delete">Delete </a>
                                             </td>
                                          </tr>  
                                     <% }) %>                                                        
@@ -111,7 +108,7 @@
             </div>
         </div>
         <div class="col-lg-12">           
-            <%- paginationHelper('items', pagination, currentStatus, query) %> 
+            <%- paginationHelper(collection, pagination, currentStatus, query) %> 
             
         </div>
     </div>

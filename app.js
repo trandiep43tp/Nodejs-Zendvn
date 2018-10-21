@@ -5,12 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 //kéo các thứ hãng thứ 3 viêt
-var expressLayouts = require('express-ejs-layouts');
-
+var expressLayouts = require('express-ejs-layouts'); 
 // hiện thông báo
 const flash = require('express-flash-notification');
 //const cookieParser = require('cookie-parser'); cái này đã có bên trên
 const session = require('express-session');
+
 
 // getting-started.js
 var mongoose = require('mongoose');
@@ -21,30 +21,10 @@ db.once('open', ()=> {
   console.log("connected")
 });
 
-
-//tìm hiểu về mongoose
-	//định nghĩa 1 kiểu collection
-    //  var kittySchema = new mongoose.Schema({
-    //    name: String
-    //  });
-	//khai báo 1 đối tượng  'Kitten' là tên 1 đối tượng
-    //var Kitten = mongoose.model('Kitten', kittySchema);
-	// //tạo ra một hàng
-    // var silence = new Kitten({ name: 'nodejs' });
-	// //lưu vào dữ liệu
-    // silence.save(function (err, silence ) {
-    //   if (err) return console.error(err);
-    // });
-	 //tìm kiếm 
-	// Kitten.find(function (err, kittens) {
-	// 	if (err) return console.error(err);
-	// 	console.log(kittens);
-	//   })
-    
-
-	
-
-
+//define path để khi trong các file khác ta không phải định lại đường dẫn nữa
+global.__base        = __dirname + '/';
+global.__path_configs = __base + 'configs/'
+//console.log(__path_configs)
 
 
 //kéo các thứ ta viết vào
@@ -72,9 +52,18 @@ app.use(flash(app));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-//thiêt lập layout được cài vào
-app.use(expressLayouts);    
-app.set('layout', 'backend');
+// app.get('/admin', function(req, res, next) {
+//     if(use==''){
+//         res.render('index', {title: "vieiw mmmmmmmmmmm"});
+//     }else{
+//         res.redirect('/admin/items')
+//     }
+   
+//   });
+ 
+
+//tạo 1 biến prefixAdmin để thi thoảng ta thay đổi đường dẫn
+app.locals.systemConfig = systemConfig;
 
  
 app.use(logger('dev'));
@@ -83,9 +72,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/admin', require('./routes/backend/home'));
 
-//tạo 1 biến prefixAdmin để thi thoảng ta thay đổi đường dẫn
-app.locals.systemConfig = systemConfig;
+//thiêt lập layout được cài vào
+app.use(expressLayouts);    
+app.set('layout', 'backend');
+
+
 
 
 //khai báo các router- viết trực tiếp
@@ -96,7 +89,7 @@ app.locals.systemConfig = systemConfig;
 //khai báo các router tách thành 1 file riêng
 app.use(`/${systemConfig.prefixAdmin}`, require('./routes/backend/index'))
 
-
+ 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -112,5 +105,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', { title: 'Page Not Found' });
 });
+
 
 module.exports = app;
