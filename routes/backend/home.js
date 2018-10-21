@@ -11,12 +11,14 @@ var systemConfig = require(__path_configs + 'system');
 const link = '/'+ systemConfig.prefixAdmin + '/items';
  //console.log(use)
 
+
+
 /* GET home page. */
-router.get('/', function(req, res, next) { 
+router.get('(/admin)?',function(req, res, next) {  
 	let item ={email: '', password: ''}
 	//khai báo người đăng nhập
 	global.use = '';
-  res.render('index',{ errors: [], item } );
+	res.render('index',{ errors: [], item } );
 });
 
 router.post('/submit', validate.validator(), function(req, res, next) {
