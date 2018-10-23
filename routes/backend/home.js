@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var bodyParser = require('body-parser');
+//var bodyParser = require('body-parser');
 
 const { check, validationResult } = require('express-validator/check');
 
@@ -9,28 +9,27 @@ const validate   = require("../../validates/users");
 
 var systemConfig = require(__path_configs + 'system');
 const link = '/'+ systemConfig.prefixAdmin + '/items';
- //console.log(use)
- router.get('/',function(req, res, next) {  
+
+router.get(`(/${systemConfig.prefixAdmin})?`,function(req, res, next) {  
 	let item ={email: '', password: ''}
 	//khai báo người đăng nhập
 	global.use = '';
 	res.render('index',{ errors: [], item } );
-});
+}); 
 
 
 /* GET home page. */
-router.get('/admin',function(req, res, next) {  
-	let item ={email: '', password: ''}
-	//khai báo người đăng nhập
-	global.use = '';
-	res.render('index',{ errors: [], item } );
-});
+// router.get(`(/${systemConfig.prefixAdmin})?`,function(req, res, next) {  
+// 	let item ={email: '', password: ''}
+// 	//khai báo người đăng nhập
+// 	global.use = '';
+// 	res.render('index',{ errors: [], item } );
+// }); 
 
 router.post('/submit', validate.validator(), function(req, res, next) {
 	const errors = validationResult(req);
 	const item       = Object.assign(req.body); 
-	console.log(item)
-
+	
 	if (!errors.isEmpty()) { 		
 		res.render('index', { errors: errors.array(), item });
 		

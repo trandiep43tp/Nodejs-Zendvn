@@ -1,3 +1,11 @@
+Thiết lập ban đầu
+    . Vào thư mục để chứa source code. Vào trang web expressjs.com và vào express generator để xem hướng dẫn
+        Cách cài: npm install express-generator -g
+                  express --view=ejs myapp  trong đó ejs là template ejs, myapp là tên forder chứa source code
+                  cd vào thư mục vưà tạo
+                  npm start sẽ mở port 3000
+
+
 cai nodemon
 npm install --save-dev nodemon
 vào "scripts": {
@@ -51,4 +59,4 @@ cách cài thông báo
 cách validator dữ liệu
 tìm kiếm nodejs express validator ta dược trang: https://www.npmjs.com/package/express-validator
 
-  
+   

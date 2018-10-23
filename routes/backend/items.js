@@ -14,12 +14,13 @@ const validate   = require("../../validates/items");
 
 const link = '/'+ systemConfig.prefixAdmin + '/items';
 
-
+  
 
 router.get('(/:status)?',async (req, res, next)=> {     //(/:status)? đây là những ký hiệu trong regularexpression nghã là có cũng được, không có cũng đươcj
 	//kiểm tra xem có người đăng nhập không, nếu không  có quay lại trang chủ
 	if(use === ''){
-		res.redirect('/admin')
+		console.log("diep user: "+ use)
+		res.redirect(`/${systemConfig.prefixAdmin}`)
 	}
 	//tạo một đối tượng
 	let objWhere ={};

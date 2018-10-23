@@ -5,13 +5,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 //kéo các thứ hãng thứ 3 viêt
-var expressLayouts = require('express-ejs-layouts'); 
-// hiện thông báo
-const flash = require('express-flash-notification');
-//const cookieParser = require('cookie-parser'); cái này đã có bên trên
+var expressLayouts = require('express-ejs-layouts');
+const flash = require('express-flash-notification'); // hiện thông báo
 const session = require('express-session');
 
-
+//kéo các thứ ta viết vào
+var systemConfig = require("./configs/system");
+ 
 // getting-started.js
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://trandiep:trandiep123@ds111913.mlab.com:11913/traning_nodejs',{ useNewUrlParser: true });
@@ -24,17 +24,7 @@ db.once('open', ()=> {
 //define path để khi trong các file khác ta không phải định lại đường dẫn nữa
 global.__base        = __dirname + '/';
 global.__path_configs = __base + 'configs/'
-//console.log(__path_configs)
-
-
-//kéo các thứ ta viết vào
-var systemConfig = require("./configs/system");
-//console.log(systemConfig.prefixAdmin)
-
-
-// kéo các router vào
-var indexRouter = require('./routes/backend');
-var itemsRouter = require('./routes/backend/items');
+//console.log(__base)
 
 var app = express();
 
@@ -47,24 +37,12 @@ app.use(session({
 }));
 app.use(flash(app));
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// app.get('/admin', function(req, res, next) {
-//     if(use==''){
-//         res.render('index', {title: "vieiw mmmmmmmmmmm"});
-//     }else{
-//         res.redirect('/admin/items')
-//     }
-   
-//   });
- 
-
 //tạo 1 biến prefixAdmin để thi thoảng ta thay đổi đường dẫn
 app.locals.systemConfig = systemConfig;
-
  
 app.use(logger('dev'));
 app.use(express.json());
@@ -72,15 +50,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', require('./routes/backend/home'));
-app.use('/admin', require('./routes/backend/home'));
+//khai báo các router
+app.use(`(/${systemConfig.prefixAdmin})?`, require('./routes/backend/home'));
  
 //thiêt lập layout được cài vào
-app.use(expressLayouts);    
+app.use(expressLayouts);     
 app.set('layout', 'backend');
-
-
-
 
 //khai báo các router- viết trực tiếp
 // app.use('/admin', indexRouter);
